@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using POS.Domain.Entities;
+using System.Reflection;
 
-namespace POS.Domain.Entities;
+namespace POS.Infrastructure.Persistences.Contexts;
 
 public partial class PosContext : DbContext
 {
@@ -55,12 +55,10 @@ public partial class PosContext : DbContext
 
     public virtual DbSet<UsersBranchOffice> UsersBranchOffices { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=DESKTOP-1L06VVF;Database=POS;Trusted_Connection=True;TrustServerCertificate=true;");
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.HasAnnotation("Relational:Collaction", "Modern_Spanish_CI_AS");
+        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         OnModelCreatingPartial(modelBuilder);
     }
 
