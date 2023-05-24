@@ -8,8 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Extensions\" />
-    <Folder Include="Persistences\Interfaces\" />
-    <Folder Include="Persistences\Repositories\" />
   </ItemGroup>
 
   <ItemGroup>
